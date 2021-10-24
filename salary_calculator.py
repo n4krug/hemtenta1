@@ -10,7 +10,7 @@ def main():
     name_column = [[sg.Text(text="Anställd:")]]
 
     # Innitial layout for employe salary column:
-    salary_column = [[sg.Text(text="Lön:")]]
+    salary_column = [[sg.Text(text="Lön (1 månad):")]]
 
     # create the main window
     layout = create_layout(name_column, salary_column, None)
@@ -103,13 +103,11 @@ def main():
 
         # redefine columns (PySimpleGUI wierdness)
         name_column = [[sg.Text(text="Anställd:")]]
-        salary_column = [[sg.Text(text="Lön:")]]
+        salary_column = [[sg.Text(text="Lön (1 månad):")]]
 
         # update names list on GUI
         for i in range(len(workers_list)):
-            name_column.append(
-                [sg.Input(default_text=workers_list[i], key=f"-NAME_{i}-")]
-            )
+            name_column.append([sg.Text(text=workers_list[i], key=f"-NAME_{i}-")])
 
         # update salaries list on GUI
         for i in range(len(salaries_list)):

@@ -1,7 +1,7 @@
 {
     "company-yearly": "6000000",
     "salaries-monthly": {
-        "Anna": "155000",
+        "Anna": "55000",
         "Bj\u00c3\u00b6rn": "55000",
         "Cecilia": "55000",
         "David": "55000",
@@ -9,8 +9,8 @@
         "Filip": "40000",
         "Greta": "40000",
         "Hans": "40000",
-        "Ingrid": "10",
-        "Johannes": "",
-        "Kent": ""
+        "Ingrid": 35000,
+        "Johannes": 35000,
+        "Kent": 35000
     }
 }
