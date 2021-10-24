@@ -46,20 +46,24 @@ def main():
             # Set yearly total salary from dict
             yearly_salary_total = int(salaries["company-yearly"])
 
+            # Get monthly salary total from yearly by dividing by 12
             monthly_salary_total = yearly_salary_total / 12
 
+            # Initialize total_salaries var with 0 value
             total_salaries = 0
 
+            # Loop through salaries and add them up to the total_salaries var
             for salary in salaries_list:
                 if salary != None and salary != "":
                     total_salaries += int(salary)
 
+            # Check if inputed salaries excede the yearly total entered and warn the user
             if total_salaries > monthly_salary_total:
                 sg.popup(
                     "Angivna löner överskrider företagets års budget!",
                     title="För mycket lön!",
                 )
-
+            # Otherwise calculate the empty salaries
             else:
                 # Count number of missing salaries
                 # https://stackoverflow.com/questions/16455777/python-count-elements-in-a-list-of-objects-with-matching-attributes
@@ -67,12 +71,22 @@ def main():
                     1 for s in salaries_list if s == "" or s == None
                 )
 
-                # Calculate the empty salaries value.
-                empty_salaries = int(
-                    (monthly_salary_total - total_salaries) / number_of_missing_salaries
-                )
+                # If there is no empty salary boxes, tell the user
+                if number_of_missing_salaries <= 0:
+                    sg.popup(
+                        "Inga tomma lönerutor att räkna ut",
+                        title="Inga tomma rutor",
+                    )
 
-                # Set the values in dict
+                # Otherwise calculate the value of each salary
+                else:
+                    # Calculate the empty salaries value.
+                    empty_salaries = int(
+                        (monthly_salary_total - total_salaries)
+                        / number_of_missing_salaries
+                    )
+
+                # Set the values in the dict
                 for key in salaries["salaries-monthly"]:
                     if (
                         salaries["salaries-monthly"][key] == None
@@ -153,7 +167,10 @@ def import_salaries():
 
     # create the window
     import_window = sg.Window(
-        title="Importera löner från fil", layout=import_layout, margins=(50, 25)
+        title="Importera löner från fil",
+        layout=import_layout,
+        margins=(50, 25),
+        modal=True,
     )
 
     # Event Loop
@@ -202,7 +219,10 @@ def export_salaries(salaries):
 
     # Create window
     export_window = sg.Window(
-        title="Exportera löner till fil", layout=export_layout, margins=(50, 25)
+        title="Exportera löner till fil",
+        layout=export_layout,
+        margins=(50, 25),
+        modal=True,
     )
 
     # Event loop
@@ -235,16 +255,22 @@ def export_salaries(salaries):
     export_window.close()
 
 
+# * Update dict with GUI values
 def update_dict(values, dict):
+
+    # Update the company yearly value from GUI
     dict["company-yearly"] = values["-YEARLY_SALARY_TOTAL-"]
 
+    # Loop through monthly salaries and update their
     for i in range(len(dict["salaries-monthly"])):
         key = list(dict["salaries-monthly"].keys())[i]
 
         dict["salaries-monthly"][key] = values[f"-SALARY_{i}-"]
 
+    # Return updated dict
     return dict
 
 
+# * If this file is run directly, run main function
 if __name__ == "__main__":
     main()
