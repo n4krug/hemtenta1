@@ -36,7 +36,49 @@ def main():
 
         # Calculate Salaries event:
         elif event == "Räkna ut tomma löner":
+            # Update dict with GUI values
             salaries = update_dict(values, salaries)
+
+            # Update lists from dict
+            workers_list = list(salaries["salaries-monthly"].keys())
+            salaries_list = list(salaries["salaries-monthly"].values())
+
+            # Set yearly total salary from dict
+            yearly_salary_total = int(salaries["company-yearly"])
+
+            monthly_salary_total = yearly_salary_total / 12
+
+            total_salaries = 0
+
+            for salary in salaries_list:
+                if salary != None and salary != "":
+                    total_salaries += int(salary)
+
+            if total_salaries > monthly_salary_total:
+                sg.popup(
+                    "Angivna löner överskrider företagets års budget!",
+                    title="För mycket lön!",
+                )
+
+            else:
+                # Count number of missing salaries
+                # https://stackoverflow.com/questions/16455777/python-count-elements-in-a-list-of-objects-with-matching-attributes
+                number_of_missing_salaries = sum(
+                    1 for s in salaries_list if s == "" or s == None
+                )
+
+                # Calculate the empty salaries value.
+                empty_salaries = int(
+                    (monthly_salary_total - total_salaries) / number_of_missing_salaries
+                )
+
+                # Set the values in dict
+                for key in salaries["salaries-monthly"]:
+                    if (
+                        salaries["salaries-monthly"][key] == None
+                        or salaries["salaries-monthly"][key] == ""
+                    ):
+                        salaries["salaries-monthly"][key] = empty_salaries
 
         # Create lists from dict (helps for printing to GUI)
         workers_list = list(salaries["salaries-monthly"].keys())
