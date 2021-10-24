@@ -28,7 +28,7 @@ def main():
 
         # Import button (run function to import dict from file through GUI)
         elif event == "Importera Löner":
-            salaries = import_salaries()
+            salaries = import_salaries("salaries.json")
 
         # Export button (run function to save dict to file through GUI)
         elif event == "Exportera Löner":
@@ -136,7 +136,11 @@ def create_layout(name_column, salary_column, yearly_salary_total):
         # main part of the layout:
         [
             sg.Text("Total lön (1 år)"),
-            sg.Input(key="-YEARLY_SALARY_TOTAL-", default_text=yearly_salary_total),
+            sg.Input(
+                key="-YEARLY_SALARY_TOTAL-",
+                default_text=yearly_salary_total,
+                size=(10, 1),
+            ),
         ],
         [
             # add name column to main layout
@@ -152,12 +156,12 @@ def create_layout(name_column, salary_column, yearly_salary_total):
 
 
 # * Import salaries from file with GUI window
-def import_salaries():
+def import_salaries(default_file):
 
     # Create layout for import window
     import_layout = [
         [
-            sg.Input(key="-File-", default_text="salaries.json"),
+            sg.Input(key="-File-", default_text=default_file),
             sg.FileBrowse(file_types=[("json", "*.json")]),
         ],
         [sg.Button("Klar"), sg.Button("Avbryt")],
