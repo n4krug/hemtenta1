@@ -1,18 +1,12 @@
-test = {
-    "company-yearly": 6000000,
-    "salaries-monthly": {
-        "Anna": 155000,
-        "Björn": 55000,
-        "Cecilia": 55000,
-        "David": 55000,
-        "Erik": 55000,
-        "Filip": 40000,
-        "Greta": 40000,
-        "Hans": 40000,
-        "Ingrid": None,
-        "Johannes": None,
-        "Kent": None,
-    },
-}
+import PySimpleGUI as sg
 
-print(list(test["salaries-monthly"].keys())[1])
+layout = [
+    [sg.T("Calendar Test")],
+    [sg.In("", size=(20, 1))],
+    [sg.CalendarButton("Choose Date", target=(1, 0), key="date")],
+    [sg.Ok(key=1)],
+]
+
+form = sg.FlexForm("Calendar", no_titlebar=True)
+b, v = form.LayoutAndRead(layout)
+sg.Popup(v["date"])

@@ -4,6 +4,7 @@ import PySimpleGUI as sg
 # Import other programs
 import salary_calculator
 import salary_increase
+import lunch_tracker
 
 
 def main():
@@ -11,6 +12,7 @@ def main():
         [
             sg.Button("Starta löneuträknare"),
             sg.Button("Starta löneöknings räknare"),
+            sg.Button("Starta lunch spårare"),
         ]
     ]
 
@@ -25,6 +27,8 @@ def main():
             salary_calculator.main()
         elif event == "Starta löneöknings räknare":
             salary_increase.main()
+        elif event == "Starta lunch spårare":
+            lunch_tracker.main()
 
     window.close()
 
