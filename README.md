@@ -47,11 +47,11 @@ Programmeringsdel:
 
 - För att köra program kör program_launcher.py
   
-  Del 1:
+Del 1:
 - För kod se salary_calculator.py
   
-  Del 2:
+Del 2:
 - För kod se salary_increase.py
   
-  Del 3
+Del 3
 - För kod se lunch_tracker.py
