@@ -14,7 +14,7 @@ def main():
 
     # create the main window
     layout = create_layout(name_column, salary_column, None)
-    window = sg.Window(title="Test", layout=layout, margins=(100, 50))
+    window = sg.Window(title="Löne räknare", layout=layout, margins=(100, 50))
 
     # Event Loop
     while True:
@@ -118,7 +118,7 @@ def main():
         # recreating window to update content
         # source: https://github.com/PySimpleGUI/PySimpleGUI/issues/845#issuecomment-443862047
         layout1 = create_layout(name_column, salary_column, yearly_salary_total)
-        window1 = sg.Window(title="Test", layout=layout1, margins=(100, 50))
+        window1 = sg.Window(title="Löne räknare", layout=layout1, margins=(100, 50))
         window.close()
         window = window1
 
